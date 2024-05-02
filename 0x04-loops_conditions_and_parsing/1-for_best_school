@@ -3,5 +3,5 @@
 
 for (( a = 0; a<10; a++ ))
 do
-echo "Best school"
+        echo "Best school"
 done
