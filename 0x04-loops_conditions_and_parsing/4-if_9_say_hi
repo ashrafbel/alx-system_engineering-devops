@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# this scropt for desplay "Best school" ten times
+# this scropt for desplay "Best school" ten times, if 9th desplay 'Hi'
 
-a=0
-
-while [ $a -lt 10 ]
+C=0
+while [ $C -lt 11 ]
 do
-        if [ $a -eq 9 ]
-        then
-                echo "Hi"
-        fi
-        echo "Best school"
-        ((a++))
+    if [ $C = 9 ]
+    then
+        echo "Hi"
+    else
+        echo "Best School"
+    fi
+    ((C++))
 done
