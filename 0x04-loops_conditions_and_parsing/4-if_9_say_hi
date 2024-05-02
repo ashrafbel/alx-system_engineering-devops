@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# this script deplay "best school" and if the 9th iteration despay 'Hi'
+
+a=0
+
+while [ $a -lt 10 ]
+do
+    if [ $a -eq 9 ]
+    then
+        echo "Hi"
+    fi
+    echo "Best school"
+    ((a++))
+done
