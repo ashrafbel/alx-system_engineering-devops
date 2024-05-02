@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # this scropt for desplay "Best school" ten times
+
 for (( a = 0; a<10; a++ ))
 do
 echo "Best school"
