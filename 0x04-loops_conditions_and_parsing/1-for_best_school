@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# this scropt for desplay "Best school" ten times
+# this script for desplay "best school" 10 times
 
-for (( a = 0; a<10; a++ ))
+for ((a = 1; a <= 10; a++))
 do
-        echo "Best school"
+    echo "Best School"
 done
