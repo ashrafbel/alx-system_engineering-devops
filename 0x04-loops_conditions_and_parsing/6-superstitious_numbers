@@ -10,7 +10,7 @@ while [ $C -le 20 ]; do
             echo "bad luck from China"
             ;;
         9)
-            echo "$Cr"
+            echo "$C"
             echo "bad luck from Japan"
             ;;
         17)
