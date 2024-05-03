@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# desplay the PID and ps name of ps countaining the word "bash"
+
+pgrep -l bash
