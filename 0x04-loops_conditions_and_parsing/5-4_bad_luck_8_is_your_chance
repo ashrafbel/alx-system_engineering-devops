@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#this scropt for desplay loops from 1 to 10
+
+C=1
+
+while [ $C -le 10 ]; do
+    if [ $C -eq 4 ]; then
+        echo "bad luck"
+    elif [ $C -eq 8 ]; then
+        echo "good luck"
+    else
+        echo "Best School"
+    fi
+    ((C++))
+done
