@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#this script for desplay lines containing the bash
+
+ps aux | grep bash
