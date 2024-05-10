@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# this script for desplay listening ports
+# only llistening sockts desplyed
+# desplay the PID & then name of program to which each socket belongsnes
+netstat -l -p
