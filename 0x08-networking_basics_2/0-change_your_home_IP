@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # this script for edit hostfile
 # change localhost & facebook adresses
+cp /etc/hosts ~/hosts.new
 sudo sed -i 's/^127.0.0.1.*localhost$/127.0.0.2\tlocalhost/' /etc/hosts
 sudo sed -i 's/^.*facebook.com$/8.8.8.8\tfacebook.com/' /etc/hosts
 cp -f ~/hosts.new /etc/hosts
