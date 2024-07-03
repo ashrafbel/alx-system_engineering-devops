@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install the web server 'nginx' on the server
+# this script for in stall nginx
 sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get install nginx -y
