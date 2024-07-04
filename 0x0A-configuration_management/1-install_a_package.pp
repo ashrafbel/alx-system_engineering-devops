@@ -1,6 +1,6 @@
-#!/usr/bin/pup
-# install flask from pip3
-package { 'puppet-lint':
-  ensure   => '2.5.0',
-  provider => 'gem'
+# 1-install_a_package.pp
+exec { 'install_flask':
+  command => '/usr/bin/pip3 install flask==2.1.0 werkzeug==2.0.3',
+  path    => '/usr/bin/:/bin/:/usr/sbin/:/sbin/',
+  unless  => '/usr/bin/python3 -c "import flask; print(flask.__version__)" | grep -q "^2.1.0$"',
 }
