@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# "Updating Packages Prior to Installation"
+# Updating Packages Prior to Installation
 sudo apt-get update
 sudo apt-get install -y nginx
 
