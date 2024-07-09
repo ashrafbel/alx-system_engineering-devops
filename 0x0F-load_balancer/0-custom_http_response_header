@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# "Updating Packages Prior to Installation"
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Developing an index.html Page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Implementing a "Moved Permanently" Redirection (301)
+nstring="server_name _;\n\trewrite ^\/redirect_me https:\/\/yourube.com\/besthor permanent;"
+sudo sed -i "s/server_name _;/$nstring/" /etc/nginx/sites-enabled/default
+# Creating a Custom 404 Error Page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+nstring="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+sudo sed -i "s/listen 80 default_server;/$nstring/" /etc/nginx/sites-enabled/default
+# Creating an HTTP Response Header
+sudo sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+# test santax errors
+sudo nginx -t
+# Restart nginx
+sudo service nginx restart
