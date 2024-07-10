@@ -1,16 +1,28 @@
 #!/usr/bin/env bash
-# Custom 404 Error Page
+# إعداد صفحة خطأ 404 مخصصة
 
+# تحديث الحزم قبل التثبيت
 sudo apt-get update
 sudo apt-get install -y nginx
 
+# إنشاء صفحة index.html
 echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# إعداد إعادة توجيه دائمة (301)
 nstring="server_name _;\n\trewrite ^\/redirect_me https:\/\/yourube.com\/besthor permanent;"
 sudo sed -i "s/server_name _;/$nstring/" /etc/nginx/sites-enabled/default
+
+# إنشاء صفحة خطأ 404 مخصصة
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 nstring="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
-sudo sed -i "s/listen 80 default_server;/$nstring/" /etc/nginx/sites-enabled/default
-sudo sed -i "/server_name _/a add_header X-Served-By \$hostname;" /etc/nginx/sites-enabled/default
 
+sudo sed -i "s/listen 80 default_server;/$nstring/" /etc/nginx/sites-enabled/default
+
+# إضافة ترويسة HTTP مخصصة بقيمة ثابتة حرف واحد
+sudo sed -i "/server_name _/a add_header X-Served-By 'A';" /etc/nginx/sites-enabled/default
+
+# اختبار تكوين Nginx
 sudo nginx -t
+
+# إعادة تشغيل خدمة Nginx
 sudo service nginx restart
