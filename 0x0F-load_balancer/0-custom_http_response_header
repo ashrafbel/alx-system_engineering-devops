@@ -1,28 +1,30 @@
 #!/usr/bin/env bash
-# إعداد صفحة خطأ 404 مخصصة
+# Install Nginx with server 0x01 config
+#+ add HTTP header named X-Served-By $HOSTNAME
 
-# تحديث الحزم قبل التثبيت
-sudo apt-get update
-sudo apt-get install -y nginx
+apt-get update
+apt-get install -y nginx
 
-# إنشاء صفحة index.html
-echo "Hello World!" | sudo tee /var/www/html/index.html
+mkdir -p /var/www/html
+touch /var/www/html/index.html
+echo "Holberton School" > /var/www/html/index.html
+touch /var/www/html/404.html
+echo "Ceci n'est pas une page" > /var/www/html/404.html
 
-# إعداد إعادة توجيه دائمة (301)
-nstring="server_name _;\n\trewrite ^\/redirect_me https:\/\/yourube.com\/besthor permanent;"
-sudo sed -i "s/server_name _;/$nstring/" /etc/nginx/sites-enabled/default
+printf %s "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    add_header X-Served-By $HOSTNAME;
+    root   /var/www/html;
+    index  index.html index.htm;
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=xJJsoquu70o/;
+    }
+    error_page 404 /404.html;
+    location /404 {
+      root /var/www/html;
+      internal;
+    }
+}" > /etc/nginx/sites-enabled/default
 
-# إنشاء صفحة خطأ 404 مخصصة
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
-nstring="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
-
-sudo sed -i "s/listen 80 default_server;/$nstring/" /etc/nginx/sites-enabled/default
-
-# إضافة ترويسة HTTP مخصصة بقيمة ثابتة حرف واحد
-sudo sed -i "/server_name _/a add_header X-Served-By 'A';" /etc/nginx/sites-enabled/default
-
-# اختبار تكوين Nginx
-sudo nginx -t
-
-# إعادة تشغيل خدمة Nginx
 sudo service nginx restart
