@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Script to resolve issues with an Nginx server that won't shut down via the daemon manager
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo sed -i 's/listen 80 default_server;/listen 0.0.0.0:80 default_server;/' /etc/nginx/sites-available/default
+sudo sed -i 's/listen \[::\]:80 default_server;/listen [::]:80 default_server;/' /etc/nginx/sites-available/default
+sudo systemctl restart nginx
+curl -I http://localhost
