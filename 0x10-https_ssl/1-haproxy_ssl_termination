@@ -1,0 +1,42 @@
+global
+    log /dev/log local0
+    maxconn 2048
+    user haproxy
+    group haproxy
+    tune.ssl.default-dh-param 2048
+
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    retries 3
+    option redispatch
+    timeout connect 5000ms
+    timeout client 10000ms
+    timeout server 10000ms
+    option forwardfor
+    option http-server-close
+    errorfile 400 /etc/haproxy/errors/400.http
+    errorfile 403 /etc/haproxy/errors/403.http
+    errorfile 408 /etc/haproxy/errors/408.http
+    errorfile 500 /etc/haproxy/errors/500.http
+    errorfile 502 /etc/haproxy/errors/502.http
+    errorfile 503 /etc/haproxy/errors/503.http
+    errorfile 504 /etc/haproxy/errors/504.http
+
+frontend kiradesu.tech-http
+    timeout client 30000
+    bind *:80
+    http-request add-header X-Forwarded-Proto http
+    default_backend kiradesu.tech_backend
+
+frontend kiradesu.tech-https
+    bind *:443 ssl crt /etc/letsencrypt/live/www.kiradesu.tech/www.kiradesu.pem
+    http-request add-header X-Forwarded-Proto https
+    default_backend kiradesu.tech_backend
+
+backend kiradesu.tech_backend
+    balance roundrobin
+    server 218560-web-01 35.174.205.23:8080 check
+    server 218560-web-02 52.91.178.16:8080 check
