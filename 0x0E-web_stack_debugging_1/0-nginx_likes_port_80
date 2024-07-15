@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Script to resolve issues
-mv /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-cp /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
-service nginx stop
-pkill nginx
-service nginx start
+apt-get update -y
+apt-get install -y nginx
+sudo service nginx enable
+sudo service nginx start
