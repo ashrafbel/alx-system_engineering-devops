@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Script to resolve issues
-apt-get update -y
-apt-get install -y nginx
-sudo service nginx enable
-sudo service nginx start
+# listen on port 80 ngix fixes
+
+sed -i 's/8080/80/g' /etc/nginx/sites-available/default
+service nginx restart
