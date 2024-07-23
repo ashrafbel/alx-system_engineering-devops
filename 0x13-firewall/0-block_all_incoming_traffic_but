@@ -1,10 +1,8 @@
-#!/user/bin/env bash
-# setup a few rules on web-01 & install ufw
-
-sudo apt install -y ufw
-sudo ufw default allow outgoing
+sudo apt-get -y install ufw
+sudo ufw disable
 sudo ufw default deny incoming
-sudo ufw allow 22
-sudo allow 443
-sudo ufw allow 80
-echo "y" | sudo ufw enable
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 80/tcp
+sudo ufw enable
