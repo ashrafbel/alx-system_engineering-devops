@@ -1,3 +1,6 @@
+# Server configuration file.
+#
+# You cansee explanations
 # http://dev.mysql.com/doc/mysql/en/server-system-variables.html
 
 [mysqld]
