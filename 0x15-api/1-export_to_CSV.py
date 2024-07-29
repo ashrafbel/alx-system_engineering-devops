@@ -2,10 +2,9 @@
 """this script to fetch TODO list progress
 for a given employee ID using REST API.
 """
-
-import requests
-import sys
 import csv
+import sys
+import requests
 
 
 URL_USERS_API = "https://jsonplaceholder.typicode.com/users/"
