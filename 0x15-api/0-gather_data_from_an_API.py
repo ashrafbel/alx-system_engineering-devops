@@ -24,10 +24,7 @@ if len(sys.argv) == 2:
         done = [t for t in data_todos if t.get('completed')]
         num_of_tasks_done = len(done)
         
-        # تأكد من تنسيق الرسالة بشكل صحيح
-        print("Employee {} is done with tasks({}/{}):".format(
-            name_of_user, num_of_tasks_done, tasks))
-        
+        print(f"Employee {name_of_user} is done with tasks({num_of_tasks_done}/{tasks}):")
         for t in done:
             print("\t{}".format(t.get('title')))
             
