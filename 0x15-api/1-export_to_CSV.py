@@ -3,8 +3,8 @@
 for a given employee ID using REST API.
 """
 import csv
-import sys
 import requests
+import sys
 
 
 URL_USERS_API = "https://jsonplaceholder.typicode.com/users/"
