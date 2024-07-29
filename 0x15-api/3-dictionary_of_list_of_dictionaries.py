@@ -1,26 +1,27 @@
 #!/usr/bin/python3
-"""this script to fetch TODO list progress
-for a given employee ID using REST API.
+"""This script fetches TODO list progress for all employees using REST API
+and exports the data in JSON format.
 """
 import json
 import requests
-import sys
-
 
 URL_USERS_API = "https://jsonplaceholder.typicode.com/users"
 URL_TODOS_API = "https://jsonplaceholder.typicode.com/todos"
 
 try:
+    # جلب بيانات جميع المستخدمين
     resp_users = requests.get(URL_USERS_API)
     resp_users.raise_for_status()
     users_data = resp_users.json()
 
-
+    # جلب بيانات جميع المهام
     resp_todos = requests.get(URL_TODOS_API)
     resp_todos.raise_for_status()
     todos_data = resp_todos.json()
 
     all_data = {}
+
+    # معالجة البيانات
     for user in users_data:
         user_id = user['id']
         username = user['username']
@@ -37,12 +38,12 @@ try:
 
         all_data[str(user_id)] = user_tasks
 
+    # إنشاء ملف JSON
+    file_name = 'todo_all_employees.json'
+    with open(file_name, mode='w') as file:
+        json.dump(all_data, file, indent=4)
 
-    fl_name = 'todo_all_employees.json'
-    with open(fl_name, mode='w') as fl:
-        json.dump(all_data, fl)
-
-    print(f"Data exported to {fl_name}")
+    print(f"Data exported to {file_name}")
 
 except requests.exceptions.RequestException as e:
     print(f"HTTP Request failed: {e}")
