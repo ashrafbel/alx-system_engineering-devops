@@ -43,7 +43,6 @@ try:
     with open(file_name, mode='w') as file:
         json.dump(all_data, file, indent=4)
 
-    print(f"Data exported to {file_name}")
 
 except requests.exceptions.RequestException as e:
     print(f"HTTP Request failed: {e}")
