@@ -1,16 +1,25 @@
 #!/usr/bin/python3
-"Module"
+"""Module to query Reddit API for subscriber count"""
 import requests
-def number_ofsubscribers(subreddit):
-    "queries the Reddit API to return the number of subscribers"
-    u = f"https://www.reddit.com/r/{subreddit}/about.json"
+
+
+def number_of_subscribers(subreddit):
+    """
+    Queries the Reddit API and returns the number of subscribers
+    for a given subreddit.
+    
+    :param subreddit: str, the name of the subreddit
+    :return: int, the number of subscribers (0 if subreddit is invalid)
+    """
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
     headers = {
-            "User-Agent": "Custom"
+        "User-Agent": "python:my_reddit_client:v1.0 (by /u/your_username)"
     }
-    res = requests.get(u, headers=headers, allowredirects=False)
-    if res.statuscode == 200:
-        info = res.json().get('data').get('subreddit')
-        if info:
-            return info_
+    
+    response = requests.get(url, headers=headers, allow_redirects=False)
+    
+    if response.status_code == 200:
+        data = response.json()
+        return data['data']['subscribers']
     else:
         return 0
