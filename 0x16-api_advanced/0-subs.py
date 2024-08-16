@@ -2,6 +2,7 @@
 "Module"
 import requests
 
+
 def number_of_subscribers(subreddit):
     """
     Queries the Reddit API and returns the number of subscribers
